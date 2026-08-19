@@ -7,6 +7,7 @@
 ### Added
 
 - 開発者向け・ユーザー向けドキュメント一式(`docs/`)
+- Capistranoによるdevelopment/staging/production 3ステージのデプロイ構成(`.env`でシークレットを分離)
 
 ## [0.1.0] - 2026-08-09
 

@@ -32,8 +32,20 @@ tail -f log/production.log    # 本番環境
 - [ ] `git status` でコミット漏れがない
 - [ ] (該当する場合)ステージング環境での確認が済んでいる
 
-## ステージング環境について
+## 環境構成(development / staging / production)
 
-本番(Sakura VPS)の前段として、ステージング環境での確認を推奨する。
-候補: 同一VPS内の別ポート/別ディレクトリへのデプロイ、またはOCIの無料枠インスタンスなど。
-現状このリポジトリにはステージング/本番用のCapistrano設定は未整備のため、導入時は別途ドキュメント化すること。
+Capistranoで3ステージを管理している(設定は `config/deploy.rb`, `config/deploy/*.rb`)。
+サーバーのIP・ユーザー名・SSH鍵パスは `.env`(gitignore対象)で管理し、リポジトリには一切含めない。
+セットアップ手順は [setup.md](./setup.md#デプロイ環境capistranoのセットアップ) を参照。
+
+### デプロイの流れ
+
+1. `develop` 相当のブランチで動作確認
+2. `bundle exec cap staging deploy` でステージング(テスト環境)に反映して確認
+3. 問題なければ `main` にマージし、`bundle exec cap production deploy` で本番反映
+
+### ロールバック
+
+```bash
+bundle exec cap production deploy:rollback
+```

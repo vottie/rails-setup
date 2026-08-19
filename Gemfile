@@ -45,5 +45,12 @@ group :development do
   # gem "spring"
 
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+
+  # Deployment (development/staging/production) via Capistrano
+  gem "capistrano", "~> 3.19", require: false
+  gem "capistrano-rails", "~> 1.6", require: false
+  gem "capistrano-bundler", "~> 2.1", require: false
+  gem "capistrano-rbenv", "~> 2.2", require: false
+  gem "dotenv", "~> 3.1"
 end
 
