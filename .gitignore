@@ -32,3 +32,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore local-only environment docs (real server IP/user/paths etc.).
+# Keep the directory's README and the template so the convention itself is documented.
+/docs/local/*
+!/docs/local/README.md
+!/docs/local/*.example

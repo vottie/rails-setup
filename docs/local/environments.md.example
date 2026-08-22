@@ -1,0 +1,41 @@
+# 環境情報(ローカル専用・テンプレート)
+
+`cp docs/local/environments.md.example docs/local/environments.md` して使う。
+このファイル自体(`.example`)はgit管理下、コピー後の`environments.md`はgit管理外。
+
+## production(本番)
+
+- プロバイダ:
+- ホスト/IP:
+- ユーザー名:
+- SSH鍵パス:
+- デプロイパス(`deploy_to`):
+- 備考:
+
+## staging(テスト環境)
+
+- プロバイダ:
+- ホスト/IP:
+- ユーザー名:
+- SSH鍵パス:
+- デプロイパス(`deploy_to`):
+- スペック(メモリ/CPUなど、リソース制約のメモ):
+- 備考:
+
+## development(開発サーバー、必要な場合のみ)
+
+- プロバイダ:
+- ホスト/IP:
+- ユーザー名:
+- SSH鍵パス:
+- 備考:
+
+---
+
+`.env`に設定する値との対応:
+
+| このファイルの項目 | .env の変数名(例: staging) |
+|---|---|
+| ホスト/IP | `STAGING_HOST` |
+| ユーザー名 | `STAGING_USER` |
+| SSH鍵パス | `STAGING_SSH_KEY_PATH` |
