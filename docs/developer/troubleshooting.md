@@ -36,3 +36,8 @@ curl -X POST http://localhost:3000/echo \
 ## master.keyがない、credentialsが復号できない
 
 `config/master.key` は `.gitignore` 対象でリポジトリに含まれない。開発環境を新しく用意する場合は、鍵を持つメンバーから共有してもらうか、`rails credentials:edit` で作り直す。
+
+## デプロイ先サーバーに `rbenv: command not found`
+
+新規に用意したサーバー(OCIなど)にはrbenv自体が入っていないことが多い。
+[OCI(ステージング)での動作検証手順](./oci-verification.md#3-サーバー側の事前準備)のインストール手順を参照。

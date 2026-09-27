@@ -65,12 +65,49 @@ sudo netfilter-persistent save   # ディストリによって永続化コマン
 
 ## 3. サーバー側の事前準備
 
-```bash
-# rbenvでRubyをセットアップ(.ruby-versionと同じバージョン)
-ssh <staging-user>@<staging-host>
-rbenv install 3.1.2   # 既に入っていればスキップ
-rbenv global 3.1.2
+OCIのイメージにはrbenvはおろかRubyのビルドに必要なパッケージも入っていないので、
+最初にディストリを確認してから入れる。
 
+```bash
+ssh <staging-user>@<staging-host>
+cat /etc/os-release   # ID=ubuntu か ID="ol"(Oracle Linux)かを確認
+```
+
+### 3-1. ビルド依存パッケージのインストール
+
+```bash
+# Ubuntu/Debian系の場合
+sudo apt-get update
+sudo apt-get install -y git build-essential libssl-dev libreadline-dev zlib1g-dev
+
+# Oracle Linux/RHEL系の場合
+sudo dnf groupinstall -y "Development Tools"
+sudo dnf install -y git openssl-devel readline-devel zlib-devel
+```
+
+### 3-2. rbenv + ruby-build のインストール
+
+```bash
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+source ~/.bashrc
+
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+```
+
+### 3-3. Rubyのインストール(.ruby-versionと同じバージョン)
+
+```bash
+rbenv install 3.1.2   # ビルドに数分かかる(1コアのため特に遅い)
+rbenv global 3.1.2
+ruby -v
+gem install bundler
+```
+
+### 3-4. デプロイ用ディレクトリの準備
+
+```bash
 # デプロイ用ディレクトリの親を作成(Capistranoがshared/releasesを掘る)
 sudo mkdir -p /var/www/rails-setup
 sudo chown <staging-user>:<staging-user> /var/www/rails-setup
