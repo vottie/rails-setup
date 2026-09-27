@@ -44,6 +44,9 @@ Capistranoで3ステージを管理している(設定は `config/deploy.rb`, `c
 2. `bundle exec cap staging deploy` でステージング(テスト環境)に反映して確認
 3. 問題なければ `main` にマージし、`bundle exec cap production deploy` で本番反映
 
+ステージング(OCI)での具体的な検証手順(swap設定・ファイアウォールの二重構成対応など)は
+[OCI(ステージング)での動作検証手順](./oci-verification.md)を参照。
+
 ### ロールバック
 
 ```bash
